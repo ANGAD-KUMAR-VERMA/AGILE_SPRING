@@ -62,11 +62,24 @@ public class AppUserDetailsService implements UserDetailsService {
 	
 	public User signUp(User newUser) throws UserAlreadyExistsException{
 		User user;
+		System.out.println("Values of new User"+newUser);
 		user = userRepository.findByUsername(newUser.getUsername());
 		if(user==null) {
-			Role role = roleRepository.findByRoleId(2);
 			Set<Role> roleList = new HashSet<Role>();
-			roleList.add(role);
+			if(newUser.getRole().equals("agent"))
+			{
+				Role role = roleRepository.findByRoleId(4);
+				roleList.add(role);
+			}else if(newUser.getRole().equals("doctor")) {
+				Role role = roleRepository.findByRoleId(3);
+				roleList.add(role);
+			}else if(newUser.getRole().equals("user")) {
+				Role role = roleRepository.findByRoleId(2);
+				roleList.add(role);
+			}
+			//Role role = roleRepository.findByRoleId(2);
+			
+			
 			newUser.setRoleList(roleList);
 			String password = newUser.getPassword();
 			newUser.setPassword(passwordEncoder().encode(password));

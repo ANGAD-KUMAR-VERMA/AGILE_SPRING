@@ -67,6 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		userDetailsList.add(User.withUsername("user").password(passwordEncoder().encode("pwd")).roles("USER").build());
 		userDetailsList
 				.add(User.withUsername("admin").password(passwordEncoder().encode("pwd")).roles("ADMIN").build());
+		userDetailsList.add(User.withUsername("doctor").password(passwordEncoder().encode("pwd")).roles("DOCTOR").build());
+		userDetailsList
+				.add(User.withUsername("agent").password(passwordEncoder().encode("pwd")).roles("AGENT").build());
 		return new InMemoryUserDetailsManager(userDetailsList);
 	}
 }
