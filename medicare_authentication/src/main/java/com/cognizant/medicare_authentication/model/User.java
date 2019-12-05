@@ -1,5 +1,6 @@
 package com.cognizant.medicare_authentication.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -8,8 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -39,6 +43,17 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role")
 	private Set<Role> roleList;
+	
+	@OneToMany(mappedBy="user")
+	private List<UserFeedback> userfeedbackList;
+	
+	@OneToOne
+	@JoinColumn(name="us_ad_id")
+	private Admin admin;
+	
+	@OneToOne
+	@JoinColumn(name="us_dr_id")
+	private Doctor doctor;
 	
 	public User() {
 		
