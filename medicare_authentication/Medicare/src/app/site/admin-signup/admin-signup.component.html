@@ -1,0 +1,96 @@
+<p>admin-signup works!</p>
+<div class="row justify-content-center mt-5">
+    <div class="col col-md-8 col-lg-8 col-sm-12">
+        <div class="card">
+            <div class="card-header">Register</div>
+            <div class="card-body">
+                <form [formGroup]="adminRegisterForm" (submit)="onSignUpSubmit()">
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="firstname">First Name</label>
+                                <input type="text" name="firstname" formControlName="firstname" class="form-control">
+                                <span class="validation-error">First name cannot be empty</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" name="firstname" formControlName="lastname" class="form-control">
+                                <span class="validation-error">Last name cannot be empty</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="text" name="age" formControlName="age" class="form-control">
+                                <span class="validation-error">Age is required</span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <label for="active">Gender</label>
+                            <div>
+                                <label for="male"><input type="radio" formControlName="gender" name="gender" [value]="true">Male</label>
+                                <label for="female"><input type="radio" formControlName="gender"
+                                        name="gender" [value]="false">Female</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="dateOfBirth">Date Of Birth</label>
+                                <input type="date" name="dateOfBirth" id="dateOfBirth" class="form-control"
+                                    formControlName="dateOfBirth">
+                                <span class="validation-error">Date of birth is required</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="contactNo">Contact No.</label>
+                                <input type="number" formControlName="contactNo" class="form-control">
+                                <span class="validation-error">Contact no is mandatory</span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="altContactNo">Alternate Contact No.</label>
+                                <input type="number" formControlName="altContactNo" class="form-control"
+                                    name="altContactNo" id="altContactNo">
+                                <span class="validation-error">Contact no should only have numbers</span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" formControlName="email" name="email" id="email" class="form-control">
+                                <span class="validation-error">Enter a valid email id</span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" formControlName="password" name="password" id="password"
+                                    class="form-control">
+                                <span class="validation-error">Password is mandatory</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <input type="submit" class="btn btn-danger" value="Register">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
