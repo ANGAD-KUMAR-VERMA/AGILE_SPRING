@@ -20,10 +20,7 @@ public class Appointment {
 	@Column(name="ap_id")
 	private long id;
 
-	@Column(name="ap_first_name")
-	private String firstname;
-	@Column(name="ap_last_name")
-	private String lastname;
+	
 	@Column(name="ap_booking_date")
 	private Date bookingDate;
 	@Column(name="ap_appointment_date")

@@ -66,20 +66,39 @@ public class AppUserDetailsService implements UserDetailsService {
 		user = userRepository.findByUsername(newUser.getUsername());
 		if(user==null) {
 			Set<Role> roleList = new HashSet<Role>();
-			if(newUser.getRole().equals("agent"))
+			if(newUser.getDoctor()!=null)
+			{
+				Role role = roleRepository.findByRoleId(3);
+				roleList.add(role);
+				newUser.setDoctor(newUser.getDoctor());
+				newUser.setAdmin(null);
+				newUser.setAgent(null);
+				newUser.setPatient(null);
+			}else if(newUser.getAgent()!=null)
 			{
 				Role role = roleRepository.findByRoleId(4);
 				roleList.add(role);
-			}else if(newUser.getRole().equals("doctor")) {
-				Role role = roleRepository.findByRoleId(3);
-				roleList.add(role);
-			}else if(newUser.getRole().equals("user")) {
+				newUser.setAgent(newUser.getAgent());
+				newUser.setAdmin(null);
+				newUser.setDoctor(null);
+				newUser.setPatient(null);
+			}else if(newUser.getPatient()!=null)
+			{
 				Role role = roleRepository.findByRoleId(2);
 				roleList.add(role);
+				newUser.setPatient(newUser.getPatient());
+				newUser.setAdmin(null);
+				newUser.setAgent(null);
+				newUser.setDoctor(null);
+			}else if(newUser.getAdmin()!=null)
+			{
+				Role role = roleRepository.findByRoleId(1);
+				roleList.add(role);
+				newUser.setAdmin(newUser.getAdmin());
+				newUser.setPatient(null);
+				newUser.setAgent(null);
+				newUser.setDoctor(null);
 			}
-			//Role role = roleRepository.findByRoleId(2);
-			
-			
 			newUser.setRoleList(roleList);
 			String password = newUser.getPassword();
 			newUser.setPassword(passwordEncoder().encode(password));

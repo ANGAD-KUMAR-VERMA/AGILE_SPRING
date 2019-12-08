@@ -3,6 +3,7 @@ package com.cognizant.medicare_authentication.model;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -33,35 +36,33 @@ public class User {
 	private String firstname;
 	@Column(name = "us_last_name")
 	private String lastname;
-	@Column(name = "us_contact_no")
-	private String contactNo;
-	@Column(name = "us_role")
-	private String role;
 	@Column(name ="us_password")
 	private String password;
 	@Column(name ="us_status")
-	private boolean status;
+	private Boolean status;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role")
+	@JoinTable(name = "user_role",joinColumns = @JoinColumn(name="ur_us_id"),inverseJoinColumns = @JoinColumn(name="ur_ro_id"))
 	private Set<Role> roleList;
 	
 	//@OneToMany(mappedBy="user")
 	//private List<UserFeedback> userfeedbackList;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="us_ad_id")
 	private Admin admin;
 	
-	@OneToOne
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="us_dr_id")
 	private Doctor doctor;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="us_pt_id")
 	private Patient patient;
 	
-	@OneToOne
+	
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="us_ag_id")
 	private Agent agent;
 	
@@ -101,21 +102,7 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	public String getContactNo() {
-		return contactNo;
-	}
-
-	public void setContactNo(String contactNo) {
-		this.contactNo = contactNo;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
+	
 
 	public String getPassword() {
 		return password;
@@ -123,6 +110,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public Set<Role> getRoleList() {
@@ -133,25 +128,63 @@ public class User {
 		this.roleList = roleList;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", contactNo=" + contactNo + ", role=" + role + ", password=" + password + ", roleList="
-				+ roleList + "]";
+	public Admin getAdmin() {
+		return admin;
 	}
 
-	public User(int userId, String username, String firstname, String lastname, String contactNo, String role,
-			String password, Set<Role> roleList) {
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
+
+	public User(int userId, String username, String firstname, String lastname, String password,
+			Boolean status, Set<Role> roleList, Admin admin, Doctor doctor, Patient patient, Agent agent) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.contactNo = contactNo;
-		this.role = role;
 		this.password = password;
+		this.status = status;
 		this.roleList = roleList;
+		this.admin = admin;
+		this.doctor = doctor;
+		this.patient = patient;
+		this.agent = agent;
 	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", password=" + password + ", status=" + status
+				+ ", roleList=" + roleList + ", admin=" + admin + ", doctor=" + doctor + ", patient=" + patient
+				+ ", agent=" + agent + "]";
+	}
+
+	
 
 	
 	

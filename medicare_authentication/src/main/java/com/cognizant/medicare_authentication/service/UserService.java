@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.cognizant.medicare_authentication.model.Admin;
 import com.cognizant.medicare_authentication.model.Role;
 import com.cognizant.medicare_authentication.model.User;
 import com.cognizant.medicare_authentication.repository.RoleRepository;
