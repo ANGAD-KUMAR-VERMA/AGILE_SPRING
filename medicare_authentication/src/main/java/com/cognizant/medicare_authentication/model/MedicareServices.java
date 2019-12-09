@@ -30,9 +30,70 @@ public class MedicareServices {
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy="medicareServicesList",fetch=FetchType.EAGER)
-	private Set<Patient> patientList;
+	private Set<Doctor> doctorList;
 	
 	public MedicareServices() {
 		
 	}
+
+	public long getMedicareServiceId() {
+		return medicareServiceId;
+	}
+
+	public void setMedicareServiceId(long medicareServiceId) {
+		this.medicareServiceId = medicareServiceId;
+	}
+
+	public String getMedicareService() {
+		return medicareService;
+	}
+
+	public void setMedicareService(String medicareService) {
+		this.medicareService = medicareService;
+	}
+
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public Set<Doctor> getDoctorList() {
+		return doctorList;
+	}
+
+	public void setDoctorList(Set<Doctor> doctorList) {
+		this.doctorList = doctorList;
+	}
+
+	public MedicareServices(long medicareServiceId, String medicareService, String serviceDescription, double amount,
+			Set<Doctor> doctorList) {
+		super();
+		this.medicareServiceId = medicareServiceId;
+		this.medicareService = medicareService;
+		this.serviceDescription = serviceDescription;
+		this.amount = amount;
+		this.doctorList = doctorList;
+	}
+
+	@Override
+	public String toString() {
+		return "MedicareServices [medicareServiceId=" + medicareServiceId + ", medicareService=" + medicareService
+				+ ", serviceDescription=" + serviceDescription + ", amount=" + amount + ", doctorList=" + doctorList
+				+ "]";
+	}
+
+
+	
+	
 }

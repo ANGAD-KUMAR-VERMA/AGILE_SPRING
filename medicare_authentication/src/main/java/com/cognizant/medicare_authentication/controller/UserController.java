@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,9 +59,25 @@ public class UserController {
 		System.out.println(username);
 		return (userServiceUserAvailability.usernameAvailable(username));
 	}
+	
+	@GetMapping("/get/{username}")
+	public User getUser(@PathVariable String username) {
+		return (userServiceUserAvailability.getUser(username));
+	}
+	
 	@GetMapping("/doctors")
 	public List<Doctor> doctors() {
 		return (doctorService.getAllDoctors());
+	}
+	
+	@GetMapping("/doctors/{id}")
+	public Doctor getDoctor(@PathVariable long id) {
+		return doctorService.getDoctor(id);
+	}
+	
+	@PutMapping("/doctors")
+	public void modifyDoctor(@RequestBody Doctor doctor){
+		doctorService.modifyDoctor(doctor);
 	}
 	
 	@GetMapping("/agents")
@@ -76,6 +93,12 @@ public class UserController {
 	@PutMapping("/agents")
 	public void modifyAgent(@RequestBody Agent agent){
 		agentService.modifyAgent(agent);
+	}
+	
+	@DeleteMapping("/agents/{id}")
+	public void deleteAgent(@RequestBody Agent agent)
+	{
+		agentService.deleteAgent(agent);
 	}
 	
 	@GetMapping("/patients")

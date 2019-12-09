@@ -23,7 +23,22 @@ public class PatientService {
 	}
 	
 	public void modifyPatient(Patient patient) {
-		patientRepository.save(patient);
+		Patient newPatient=patientRepository.findByUsername(patient.getUsername());
+		newPatient.setUsername(patient.getUsername());
+		newPatient.setFirstname(patient.getFirstname());
+		newPatient.setLastname(patient.getLastname());
+		newPatient.setPassword(patient.getPassword());
+		newPatient.setAge(patient.getAge());
+		newPatient.setGender(patient.getGender());
+		newPatient.setDateOfBirth(patient.getDateOfBirth());
+		newPatient.setContactNo(patient.getContactNo());
+		newPatient.setAltContactNo(patient.getAltContactNo());
+		newPatient.setEmail(patient.getEmail());
+		newPatient.setCity(patient.getCity());
+		newPatient.setState(patient.getState());
+		newPatient.setZipcode(patient.getZipcode());
+		
+		patientRepository.save(newPatient);
 	}
 	
 	

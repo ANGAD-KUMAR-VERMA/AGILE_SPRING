@@ -75,9 +75,7 @@ public class Patient {
 	@OneToMany(mappedBy = "patient")
 	private Set<MedicalTestHistory> medicalTestHistoryList;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="patient_medicare_services")
-	private Set<MedicareServices> medicareServicesList;
+	
 		
 	public Patient() {
 		
@@ -251,19 +249,12 @@ public class Patient {
 		this.medicalTestHistoryList = medicalTestHistoryList;
 	}
 
-	public Set<MedicareServices> getMedicareServicesList() {
-		return medicareServicesList;
-	}
 
-	public void setMedicareServicesList(Set<MedicareServices> medicareServicesList) {
-		this.medicareServicesList = medicareServicesList;
-	}
 
 	public Patient(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
 			String address2, String city, String state, String zipcode, Set<Doctor> doctorList, Set<Agent> agentList,
-			User user, Set<Appointment> appointment, Set<MedicalTestHistory> medicalTestHistoryList,
-			Set<MedicareServices> medicareServicesList) {
+			User user, Set<Appointment> appointment, Set<MedicalTestHistory> medicalTestHistoryList) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -286,7 +277,7 @@ public class Patient {
 		this.user = user;
 		this.appointment = appointment;
 		this.medicalTestHistoryList = medicalTestHistoryList;
-		this.medicareServicesList = medicareServicesList;
+		
 	}
 
 	@Override
@@ -296,8 +287,7 @@ public class Patient {
 				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
 				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
 				+ ", doctorList=" + doctorList + ", agentList=" + agentList + ", user=" + user + ", appointment="
-				+ appointment + ", medicalTestHistoryList=" + medicalTestHistoryList + ", medicareServicesList="
-				+ medicareServicesList + "]";
+				+ appointment + ", medicalTestHistoryList=" + medicalTestHistoryList + "]";
 	}
 
    

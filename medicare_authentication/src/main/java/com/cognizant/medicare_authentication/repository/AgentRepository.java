@@ -8,5 +8,5 @@ import com.cognizant.medicare_authentication.model.Agent;
 @Repository
 public interface AgentRepository extends JpaRepository<Agent, Long> {
 
-	
+	public Agent findByUsername(String username);
 }

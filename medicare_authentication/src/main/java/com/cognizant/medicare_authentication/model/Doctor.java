@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -76,6 +77,10 @@ public class Doctor {
 	
 	 @OneToMany(mappedBy = "doctor")
 	private Set<Appointment> appointmentList;
+	 
+	 @ManyToMany(fetch=FetchType.EAGER)
+		@JoinTable(name="patient_medicare_services")
+		private Set<MedicareServices> medicareServicesList;
 	
 	public Doctor() {
 		
@@ -273,11 +278,19 @@ public class Doctor {
 		this.appointmentList = appointmentList;
 	}
 
+	public Set<MedicareServices> getMedicareServicesList() {
+		return medicareServicesList;
+	}
+
+	public void setMedicareServicesList(Set<MedicareServices> medicareServicesList) {
+		this.medicareServicesList = medicareServicesList;
+	}
+
 	public Doctor(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
 			String address2, String city, String state, String zipcode, String degree, String speciality,
 			String workhours, String hospitalname, String medicareServiceId, Set<Patient> patientList, User user,
-			Set<Appointment> appointmentList) {
+			Set<Appointment> appointmentList, Set<MedicareServices> medicareServicesList) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -303,6 +316,7 @@ public class Doctor {
 		this.patientList = patientList;
 		this.user = user;
 		this.appointmentList = appointmentList;
+		this.medicareServicesList = medicareServicesList;
 	}
 
 	@Override
@@ -313,7 +327,9 @@ public class Doctor {
 				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
 				+ ", degree=" + degree + ", speciality=" + speciality + ", workhours=" + workhours + ", hospitalname="
 				+ hospitalname + ", medicareServiceId=" + medicareServiceId + ", patientList=" + patientList + ", user="
-				+ user + ", appointmentList=" + appointmentList + "]";
+				+ user + ", appointmentList=" + appointmentList + ", medicareServicesList=" + medicareServicesList
+				+ "]";
 	}
+
     
 }

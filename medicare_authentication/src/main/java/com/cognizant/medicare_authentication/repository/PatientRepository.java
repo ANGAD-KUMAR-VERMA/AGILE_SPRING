@@ -8,4 +8,6 @@ import com.cognizant.medicare_authentication.model.Patient;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
+	public Patient findByUsername(String username);
+	
 }

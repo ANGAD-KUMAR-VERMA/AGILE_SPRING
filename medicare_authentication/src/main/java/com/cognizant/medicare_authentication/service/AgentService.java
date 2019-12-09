@@ -25,6 +25,29 @@ public class AgentService {
 	}
 
 	public void modifyAgent(Agent agent) {
-		agentRepository.save(agent);
+		
+		Agent newAgent = agentRepository.findByUsername(agent.getUsername());
+		newAgent.setUsername(agent.getUsername());
+		newAgent.setFirstname(agent.getFirstname());
+		newAgent.setLastname(agent.getLastname());
+		newAgent.setPassword(agent.getPassword());
+		newAgent.setAge(agent.getAge());
+		newAgent.setGender(agent.getGender());
+		newAgent.setDateOfBirth(agent.getDateOfBirth());
+		newAgent.setContactNo(agent.getContactNo());
+		newAgent.setAltContactNo(agent.getAltContactNo());
+		newAgent.setEmail(agent.getEmail());
+		newAgent.setAddress1(agent.getAddress1());
+		newAgent.setAddress2(agent.getAddress2());
+		newAgent.setCity(agent.getCity());
+		newAgent.setState(agent.getState());
+		newAgent.setZipcode(agent.getZipcode());
+		
+		agentRepository.save(newAgent);
+	}
+	
+	public void deleteAgent(Agent agent)
+	{
+		agentRepository.delete(agent);
 	}
 }

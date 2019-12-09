@@ -49,5 +49,9 @@ public class UserService {
 	public boolean usernameAvailable(String username) {
 		return userRepository.findByUsername(username) == null?true:false;
 	}
+
+	public User getUser(String username) {
+		return userRepository.findByUsername(username);
+	}
 }
 
