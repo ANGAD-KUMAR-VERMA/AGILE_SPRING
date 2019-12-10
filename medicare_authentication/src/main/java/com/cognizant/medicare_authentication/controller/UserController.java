@@ -65,6 +65,12 @@ public class UserController {
 		return (userServiceUserAvailability.getUser(username));
 	}
 	
+	@PutMapping("/{username}")
+	public void modifyUser(@RequestBody User user, @PathVariable String username) {System.out.println(username);
+		 userServiceUserAvailability.modifyUser(user,username);
+	}
+	
+	
 	@GetMapping("/doctors")
 	public List<Doctor> doctors() {
 		return (doctorService.getAllDoctors());
