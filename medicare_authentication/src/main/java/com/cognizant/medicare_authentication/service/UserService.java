@@ -54,8 +54,6 @@ public class UserService {
 		System.out.println(user);
 		User newUser = userRepository.findByUsername(username);
 		newUser.setUsername(user.getUsername());
-		newUser.setFirstname(user.getFirstname());
-		newUser.setLastname(user.getLastname());
 		newUser.setPassword(user.getPassword());
 		newUser.setRoleList(user.getRoleList());
 		newUser.setStatus(user.getStatus());

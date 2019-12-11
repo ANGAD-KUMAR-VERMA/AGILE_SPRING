@@ -32,10 +32,7 @@ public class User {
 	@Column(name = "us_user_name")
 	private String username;
 	
-	@Column(name = "us_first_name")
-	private String firstname;
-	@Column(name = "us_last_name")
-	private String lastname;
+	
 	@Column(name ="us_password")
 	private String password;
 	@Column(name ="us_status")
@@ -85,24 +82,6 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	
 
 	public String getPassword() {
 		return password;
@@ -160,13 +139,11 @@ public class User {
 		this.agent = agent;
 	}
 
-	public User(int userId, String username, String firstname, String lastname, String password,
-			Boolean status, Set<Role> roleList, Admin admin, Doctor doctor, Patient patient, Agent agent) {
+	public User(int userId, String username, String password, Boolean status, Set<Role> roleList, Admin admin,
+			Doctor doctor, Patient patient, Agent agent) {
 		super();
 		this.userId = userId;
 		this.username = username;
-		this.firstname = firstname;
-		this.lastname = lastname;
 		this.password = password;
 		this.status = status;
 		this.roleList = roleList;
@@ -178,13 +155,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", password=" + password + ", status=" + status
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", status=" + status
 				+ ", roleList=" + roleList + ", admin=" + admin + ", doctor=" + doctor + ", patient=" + patient
 				+ ", agent=" + agent + "]";
 	}
-
-	
 
 	
 	
