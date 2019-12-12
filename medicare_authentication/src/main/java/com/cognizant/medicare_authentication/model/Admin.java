@@ -40,6 +40,8 @@ public class Admin {
 	private String altContactNo;
 	@Column(name="ad_email")
 	private String email;
+	@Column(name="ad_status")
+	private boolean status;
 	
 	@JsonIgnore
 	@OneToOne(mappedBy="admin")
@@ -137,6 +139,14 @@ public class Admin {
 		this.email = email;
 	}
 
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -146,7 +156,8 @@ public class Admin {
 	}
 
 	public Admin(long id, String username, String firstname, String lastname, String password, String age,
-			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, User user) {
+			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, boolean status,
+			User user) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -159,6 +170,7 @@ public class Admin {
 		this.contactNo = contactNo;
 		this.altContactNo = altContactNo;
 		this.email = email;
+		this.status = status;
 		this.user = user;
 	}
 
@@ -166,9 +178,9 @@ public class Admin {
 	public String toString() {
 		return "Admin [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
-				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", user=" + user
-				+ "]";
+				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", status="
+				+ status + ", user=" + user + "]";
 	}
 
-	
+
 }

@@ -53,6 +53,9 @@ public class Agent {
 	private String state;
 	@Column(name="ag_zip_code")
 	private String zipcode;
+	@Column(name="ag_status")
+	private boolean status;
+	
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy="agentList",fetch=FetchType.EAGER)
@@ -194,6 +197,14 @@ public class Agent {
 		this.zipcode = zipcode;
 	}
 
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	public Set<Patient> getPatientList() {
 		return patientList;
 	}
@@ -212,7 +223,8 @@ public class Agent {
 
 	public Agent(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
-			String address2, String city, String state, String zipcode, Set<Patient> patientList, User user) {
+			String address2, String city, String state, String zipcode, boolean status, Set<Patient> patientList,
+			User user) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -230,6 +242,7 @@ public class Agent {
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
+		this.status = status;
 		this.patientList = patientList;
 		this.user = user;
 	}
@@ -240,10 +253,8 @@ public class Agent {
 				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
 				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
 				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
-				+ ", patientList=" + patientList + ", user=" + user + "]";
+				+ ", status=" + status + ", patientList=" + patientList + ", user=" + user + "]";
 	}
-
-	
-
+     
 	
 }

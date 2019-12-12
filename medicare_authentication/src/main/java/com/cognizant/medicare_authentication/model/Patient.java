@@ -55,6 +55,9 @@ public class Patient {
 	private String state;
 	@Column(name="pt_zip_code")
 	private String zipcode;
+	@Column(name="pt_status")
+	private boolean status;
+	
 	
 	
 	@ManyToMany(fetch=FetchType.EAGER)
@@ -81,169 +84,265 @@ public class Patient {
 		
 	}
 
+
+
 	public long getId() {
 		return id;
 	}
+
+
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
+
+
 	public String getUsername() {
 		return username;
 	}
+
+
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+
+
 	public String getFirstname() {
 		return firstname;
 	}
+
+
 
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
 
+
+
 	public String getLastname() {
 		return lastname;
 	}
+
+
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
 
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+
+
 	public String getAge() {
 		return age;
 	}
+
+
 
 	public void setAge(String age) {
 		this.age = age;
 	}
 
+
+
 	public String getGender() {
 		return gender;
 	}
+
+
 
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
+
+
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
+
+
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+
+
 	public String getContactNo() {
 		return contactNo;
 	}
+
+
 
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 
+
+
 	public String getAltContactNo() {
 		return altContactNo;
 	}
+
+
 
 	public void setAltContactNo(String altContactNo) {
 		this.altContactNo = altContactNo;
 	}
 
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+
+
 	public String getAddress1() {
 		return address1;
 	}
+
+
 
 	public void setAddress1(String address1) {
 		this.address1 = address1;
 	}
 
+
+
 	public String getAddress2() {
 		return address2;
 	}
+
+
 
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
 
+
+
 	public String getCity() {
 		return city;
 	}
+
+
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+
+
 	public String getState() {
 		return state;
 	}
+
+
 
 	public void setState(String state) {
 		this.state = state;
 	}
 
+
+
 	public String getZipcode() {
 		return zipcode;
 	}
+
+
 
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 
+
+
+	public boolean getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
+
 	public Set<Doctor> getDoctorList() {
 		return doctorList;
 	}
+
+
 
 	public void setDoctorList(Set<Doctor> doctorList) {
 		this.doctorList = doctorList;
 	}
 
+
+
 	public Set<Agent> getAgentList() {
 		return agentList;
 	}
+
+
 
 	public void setAgentList(Set<Agent> agentList) {
 		this.agentList = agentList;
 	}
 
+
+
 	public User getUser() {
 		return user;
 	}
+
+
 
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+
+
 	public Set<Appointment> getAppointment() {
 		return appointment;
 	}
+
+
 
 	public void setAppointment(Set<Appointment> appointment) {
 		this.appointment = appointment;
 	}
 
+
+
 	public Set<MedicalTestHistory> getMedicalTestHistoryList() {
 		return medicalTestHistoryList;
 	}
+
+
 
 	public void setMedicalTestHistoryList(Set<MedicalTestHistory> medicalTestHistoryList) {
 		this.medicalTestHistoryList = medicalTestHistoryList;
@@ -253,8 +352,9 @@ public class Patient {
 
 	public Patient(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
-			String address2, String city, String state, String zipcode, Set<Doctor> doctorList, Set<Agent> agentList,
-			User user, Set<Appointment> appointment, Set<MedicalTestHistory> medicalTestHistoryList) {
+			String address2, String city, String state, String zipcode, boolean status, Set<Doctor> doctorList,
+			Set<Agent> agentList, User user, Set<Appointment> appointment,
+			Set<MedicalTestHistory> medicalTestHistoryList) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -272,13 +372,15 @@ public class Patient {
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
+		this.status = status;
 		this.doctorList = doctorList;
 		this.agentList = agentList;
 		this.user = user;
 		this.appointment = appointment;
 		this.medicalTestHistoryList = medicalTestHistoryList;
-		
 	}
+
+
 
 	@Override
 	public String toString() {
@@ -286,10 +388,10 @@ public class Patient {
 				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
 				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
 				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
-				+ ", doctorList=" + doctorList + ", agentList=" + agentList + ", user=" + user + ", appointment="
-				+ appointment + ", medicalTestHistoryList=" + medicalTestHistoryList + "]";
+				+ ", status=" + status + ", doctorList=" + doctorList + ", agentList=" + agentList + ", user=" + user
+				+ ", appointment=" + appointment + ", medicalTestHistoryList=" + medicalTestHistoryList + "]";
 	}
 
-   
+	
 	
 }
