@@ -20,7 +20,7 @@ public class MedicareServices {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ms_id")
-	private long medicareServiceId;
+	private long id;
 	@Column(name="ms_medicare_service")
 	private String medicareService;
 	@Column(name="ms_service_desc")
@@ -36,12 +36,12 @@ public class MedicareServices {
 		
 	}
 
-	public long getMedicareServiceId() {
-		return medicareServiceId;
+	public long getId() {
+		return id;
 	}
 
-	public void setMedicareServiceId(long medicareServiceId) {
-		this.medicareServiceId = medicareServiceId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getMedicareService() {
@@ -76,10 +76,10 @@ public class MedicareServices {
 		this.doctorList = doctorList;
 	}
 
-	public MedicareServices(long medicareServiceId, String medicareService, String serviceDescription, double amount,
+	public MedicareServices(long id, String medicareService, String serviceDescription, double amount,
 			Set<Doctor> doctorList) {
 		super();
-		this.medicareServiceId = medicareServiceId;
+		this.id = id;
 		this.medicareService = medicareService;
 		this.serviceDescription = serviceDescription;
 		this.amount = amount;
@@ -88,12 +88,9 @@ public class MedicareServices {
 
 	@Override
 	public String toString() {
-		return "MedicareServices [medicareServiceId=" + medicareServiceId + ", medicareService=" + medicareService
-				+ ", serviceDescription=" + serviceDescription + ", amount=" + amount + ", doctorList=" + doctorList
-				+ "]";
+		return "MedicareServices [id=" + id + ", medicareService=" + medicareService + ", serviceDescription="
+				+ serviceDescription + ", amount=" + amount + ", doctorList=" + doctorList + "]";
 	}
 
 
-	
-	
 }

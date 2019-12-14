@@ -121,9 +121,5 @@ public class UserController {
 	public void modifyPatient(@RequestBody Patient patient){
 		patientService.modifyPatient(patient);
 	}
-	
-	
-	
-
 }
 

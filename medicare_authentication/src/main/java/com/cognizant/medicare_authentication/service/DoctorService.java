@@ -43,6 +43,7 @@ public void modifyDoctor(Doctor doctor) {
 	newDoctor.setSpeciality(doctor.getSpeciality());
 	newDoctor.setWorkhours(doctor.getWorkhours());
 	newDoctor.setHospitalname(doctor.getHospitalname());
+	newDoctor.setStatus(doctor.isStatus());
 	
 	doctorRepo.save(newDoctor);
 }

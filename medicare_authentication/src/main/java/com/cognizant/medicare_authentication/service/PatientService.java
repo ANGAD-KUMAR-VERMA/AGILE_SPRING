@@ -37,6 +37,7 @@ public class PatientService {
 		newPatient.setCity(patient.getCity());
 		newPatient.setState(patient.getState());
 		newPatient.setZipcode(patient.getZipcode());
+		newPatient.setStatus(patient.isStatus());
 		
 		patientRepository.save(newPatient);
 	}

@@ -278,7 +278,7 @@ public class Patient {
 
 
 
-	public boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
 

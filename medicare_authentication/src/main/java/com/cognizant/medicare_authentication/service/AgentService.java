@@ -42,6 +42,7 @@ public class AgentService {
 		newAgent.setCity(agent.getCity());
 		newAgent.setState(agent.getState());
 		newAgent.setZipcode(agent.getZipcode());
+		newAgent.setStatus(agent.isStatus());
 		
 		agentRepository.save(newAgent);
 	}
