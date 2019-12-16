@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -60,6 +61,9 @@ public class Agent {
 	@JsonIgnore
 	@ManyToMany(mappedBy="agentList",fetch=FetchType.EAGER)
 	private Set<Patient> patientList;
+	
+	@OneToMany(mappedBy = "agent")
+	private Set<Appointment> appointment;
 	
 	@JsonIgnore
 	@OneToOne(mappedBy = "agent")
@@ -213,6 +217,14 @@ public class Agent {
 		this.patientList = patientList;
 	}
 
+	public Set<Appointment> getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Set<Appointment> appointment) {
+		this.appointment = appointment;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -221,10 +233,20 @@ public class Agent {
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Agent [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
+				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
+				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
+				+ ", status=" + status + ", patientList=" + patientList + ", appointment=" + appointment + ", user="
+				+ user + "]";
+	}
+
 	public Agent(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
 			String address2, String city, String state, String zipcode, boolean status, Set<Patient> patientList,
-			User user) {
+			Set<Appointment> appointment, User user) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -244,17 +266,9 @@ public class Agent {
 		this.zipcode = zipcode;
 		this.status = status;
 		this.patientList = patientList;
+		this.appointment = appointment;
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "Agent [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
-				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
-				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
-				+ ", status=" + status + ", patientList=" + patientList + ", user=" + user + "]";
-	}
-     
 	
 }

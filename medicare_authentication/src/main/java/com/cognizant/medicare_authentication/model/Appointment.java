@@ -1,5 +1,6 @@
 package com.cognizant.medicare_authentication.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -22,13 +23,12 @@ public class Appointment {
 
 	
 	@Column(name="ap_booking_date")
-	private Date bookingDate;
+	private LocalDate bookingDate;
 	@Column(name="ap_appointment_date")
-	private Date appointmentDate;
+	private LocalDate appointmentDate;
 	@Column(name="ap_status")
-	private boolean status;
-	@Column(name="ap_medical_issue")
-	private String medicalIssue;
+	private String status;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="ap_dr_id")
@@ -37,9 +37,89 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name="ap_pt_id")
 	private Patient patient;
+	
+	@ManyToOne
+	@JoinColumn(name="ap_ag_id")
+	private Agent agent;
 
 	public  Appointment() {
 		
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public LocalDate getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(LocalDate bookingDate) {
+		this.bookingDate = bookingDate;
+	}
+
+	public LocalDate getAppointmentDate() {
+		return appointmentDate;
+	}
+
+	public void setAppointmentDate(LocalDate appointmentDate) {
+		this.appointmentDate = appointmentDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Agent getAgent() {
+		return agent;
+	}
+
+	public void setAgent(Agent agent) {
+		this.agent = agent;
+	}
+
+	public Appointment(long id, LocalDate bookingDate, LocalDate appointmentDate, String status, Doctor doctor, Patient patient,
+			Agent agent) {
+		super();
+		this.id = id;
+		this.bookingDate = bookingDate;
+		this.appointmentDate = appointmentDate;
+		this.status = status;
+		this.doctor = doctor;
+		this.patient = patient;
+		this.agent = agent;
+	}
+
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", bookingDate=" + bookingDate + ", appointmentDate=" + appointmentDate
+				+ ", status=" + status + ", doctor=" + doctor + ", patient=" + patient + ", agent=" + agent + "]";
+	}
+	
+	
 	
 }

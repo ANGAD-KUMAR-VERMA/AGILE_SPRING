@@ -74,7 +74,23 @@ public class AppUser implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return user.getAdmin().isStatus() || user.getAgent().isStatus() || user.getDoctor().isStatus() || user.getPatient().isStatus();
+		//return user.getAdmin().isStatus() || user.getAgent().isStatus() || user.getDoctor().isStatus() || user.getPatient().isStatus();
+		if(user.getAdmin()!=null) {
+			return user.getAdmin().isStatus();
+		}
+		if(user.getAgent()!=null) {
+			return user.getAgent().isStatus();
+		}
+		if(user.getDoctor()!=null) {
+			return user.getDoctor().isStatus();
+		}
+		if(user.getPatient()!=null) {
+			return user.getPatient().isStatus();
+		}
+		return false;
+		
+		
+	//	return  user.getPatient().isStatus();
 	}
 
 }

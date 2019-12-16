@@ -65,7 +65,7 @@ public class Doctor {
 	@Column(name="dr_hospital_name")
 	private String hospitalname;
 	@Column(name="dr_medicare_service_id")
-	private String medicareServiceId;
+	private long medicareServiceId;
 	@Column(name="dr_status", columnDefinition="boolean default false")
 	private boolean status;
 	
@@ -78,6 +78,7 @@ public class Doctor {
 	@OneToOne(mappedBy="doctor")
 	private User user;
 	
+	@JsonIgnore
 	 @OneToMany(mappedBy = "doctor")
 	private Set<Appointment> appointmentList;
 	 
@@ -249,11 +250,11 @@ public class Doctor {
 		this.hospitalname = hospitalname;
 	}
 
-	public String getMedicareServiceId() {
+	public long getMedicareServiceId() {
 		return medicareServiceId;
 	}
 
-	public void setMedicareServiceId(String medicareServiceId) {
+	public void setMedicareServiceId(long medicareServiceId) {
 		this.medicareServiceId = medicareServiceId;
 	}
 
@@ -300,7 +301,7 @@ public class Doctor {
 	public Doctor(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
 			String address2, String city, String state, String zipcode, String degree, String speciality,
-			String workhours, String hospitalname, String medicareServiceId, boolean status, Set<Patient> patientList,
+			String workhours, String hospitalname, long medicareServiceId, boolean status, Set<Patient> patientList,
 			User user, Set<Appointment> appointmentList, Set<MedicareServices> medicareServicesList) {
 		super();
 		this.id = id;
@@ -344,6 +345,5 @@ public class Doctor {
 	}
 
 	
-
     
 }

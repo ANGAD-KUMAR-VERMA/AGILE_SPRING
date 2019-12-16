@@ -2,11 +2,14 @@ package com.cognizant.medicare_authentication.controller;
 
 
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +21,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.medicare_authentication.model.Agent;
+import com.cognizant.medicare_authentication.model.Appointment;
 import com.cognizant.medicare_authentication.model.Doctor;
+import com.cognizant.medicare_authentication.model.MedicareServices;
 import com.cognizant.medicare_authentication.model.Patient;
 import com.cognizant.medicare_authentication.model.User;
 import com.cognizant.medicare_authentication.service.AgentService;
 import com.cognizant.medicare_authentication.service.AppUserDetailsService;
 import com.cognizant.medicare_authentication.service.DoctorService;
+import com.cognizant.medicare_authentication.service.MedicareServicesService;
 import com.cognizant.medicare_authentication.service.PatientService;
 import com.cognizant.medicare_authentication.service.UserService;
 import com.cognizant.medicare_authentication.util.UserAlreadyExistsException;
+
+import ch.qos.logback.core.db.dialect.MsSQLDialect;
 
 
 
@@ -47,6 +55,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userServiceUserAvailability;
+	
+	@Autowired
+	private MedicareServicesService medicareServicesService; 
 
 	@PostMapping
 	public User signUp(@RequestBody @Valid User user) throws UserAlreadyExistsException {
@@ -120,6 +131,21 @@ public class UserController {
 	@PutMapping("/patients")
 	public void modifyPatient(@RequestBody Patient patient){
 		patientService.modifyPatient(patient);
+	}
+	
+	@PutMapping("/appointment/{agentId}/{doctorId}/{patientId}/{appointmentDate}")
+	public boolean appointment(@PathVariable long agentId, @PathVariable long doctorId,@PathVariable long patientId,@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate appointmentDate) {
+		return patientService.appointment(appointmentDate, doctorId, patientId, agentId);
+	}
+	
+	@GetMapping("/get/appointments/{patientId}")
+	public List<Appointment> getAppointments(@PathVariable long patientId){
+		return patientService.getAppointments(patientId);
+	}
+	
+	@GetMapping("/medicareServices")
+	public List<MedicareServices> getAllServices(){
+		return medicareServicesService.getAllServices();
 	}
 }
 

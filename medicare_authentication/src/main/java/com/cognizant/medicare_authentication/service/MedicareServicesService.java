@@ -33,6 +33,7 @@ public class MedicareServicesService {
 	
 	public void updateService(MedicareServices medicareServices)
 	{
+		System.out.println(medicareServices.getId());
 		MedicareServices newMedicareServices=medicareServiceRepository.findById(medicareServices.getId());
 		newMedicareServices.setMedicareService(medicareServices.getMedicareService());
 		newMedicareServices.setServiceDescription(medicareServices.getServiceDescription());

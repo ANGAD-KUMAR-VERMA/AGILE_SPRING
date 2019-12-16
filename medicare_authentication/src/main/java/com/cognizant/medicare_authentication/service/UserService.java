@@ -9,8 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.medicare_authentication.model.Admin;
+import com.cognizant.medicare_authentication.model.MedicareServices;
 import com.cognizant.medicare_authentication.model.Role;
 import com.cognizant.medicare_authentication.model.User;
+import com.cognizant.medicare_authentication.repository.MedicareServiceRepository;
 import com.cognizant.medicare_authentication.repository.RoleRepository;
 import com.cognizant.medicare_authentication.repository.UserRepository;
 import com.cognizant.medicare_authentication.util.UserAlreadyExistsException;
@@ -23,6 +25,9 @@ public class UserService {
 
 	@Autowired
 	RoleRepository roleRepository;
+	
+	@Autowired
+	MedicareServiceRepository medicareServiceRepository;
 
 	public User signUp(User newUser) throws UserAlreadyExistsException {
 		User user = new User();
@@ -71,4 +76,10 @@ public class UserService {
 		
 		userRepository.save(newUser);
 	}
+	
+	public List<MedicareServices> getAllServices()
+	{
+		return medicareServiceRepository.findAll();
+	}
+	
 }

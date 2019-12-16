@@ -49,7 +49,6 @@ public class User {
 	@JoinColumn(name="us_ad_id")
 	private Admin admin;
 	
-	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="us_dr_id")
 	private Doctor doctor;

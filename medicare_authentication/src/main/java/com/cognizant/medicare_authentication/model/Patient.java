@@ -72,6 +72,7 @@ public class Patient {
 	@OneToOne(mappedBy = "patient")
 	private User user;
 	
+@JsonIgnore
 	@OneToMany(mappedBy = "patient")
 	private Set<Appointment> appointment;
 	

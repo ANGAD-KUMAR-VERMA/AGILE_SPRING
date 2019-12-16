@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.medicare_authentication.model.Doctor;
+import com.cognizant.medicare_authentication.model.MedicareServices;
 import com.cognizant.medicare_authentication.repository.DoctorRepository;
 
 @Service
@@ -47,6 +48,8 @@ public void modifyDoctor(Doctor doctor) {
 	
 	doctorRepo.save(newDoctor);
 }
+
+
 
 
 }
