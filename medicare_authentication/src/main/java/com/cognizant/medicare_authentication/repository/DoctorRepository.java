@@ -10,5 +10,5 @@ import com.cognizant.medicare_authentication.model.Doctor;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long>{
 
-	public Doctor findByUsername(String firstname);
+	public Doctor findByUsername(String username);
 }

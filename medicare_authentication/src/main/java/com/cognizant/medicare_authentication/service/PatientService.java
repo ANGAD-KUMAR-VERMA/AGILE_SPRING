@@ -40,6 +40,10 @@ public class PatientService {
 		return patientRepository.findById(id).get();
 	}
 	
+	public Patient getPatientByUsername(String username) {
+		return patientRepository.findByUsername(username);
+	}
+	
 	public void modifyPatient(Patient patient) {
 		Patient newPatient=patientRepository.findByUsername(patient.getUsername());
 		newPatient.setUsername(patient.getUsername());

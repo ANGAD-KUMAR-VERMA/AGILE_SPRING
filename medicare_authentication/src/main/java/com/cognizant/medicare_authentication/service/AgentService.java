@@ -23,6 +23,11 @@ public class AgentService {
 		
 		return agentRepository.findById(id).get();
 	}
+	
+public Agent getAgentByUsername(String username) {
+		
+		return agentRepository.findByUsername(username);
+	}
 
 	public void modifyAgent(Agent agent) {
 		

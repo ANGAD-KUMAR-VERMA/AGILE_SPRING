@@ -1,0 +1,305 @@
+<table class="table table-bordered" border="0" width="90%" cellspacing="2" cellpadding="8" align="center">
+    <tbody>
+        <tr>
+            <th class="title" style="text-align: center; width: 98%;" colspan="7" align="center">Appointment Details
+            </th>
+        </tr>
+        <tr>
+            <th class="title" style="text-align: left; width: 14.9142%;">Patient Name</th>
+            <th class="title" style="text-align: left; width: 9%;">Date Of Booking</th>
+            <th class="title" style="text-align: left; width: 9%;">Date Of Appointment</th>
+            <th class="title" style="text-align: left; width: 26%;">Disease</th>
+            <th class="title" style="text-align: left; width: 10%;">Status</th>
+        </tr>
+        <tr *ngFor="let appointment of appointments">
+            <td style="text-align: left; width: 14.9142%;"> {{appointment.patientFirstName}}
+                {{appointment.patientLastName}}</td>
+            <td style="text-align: left; width: 9%;">
+                <!-- <p>{{agent.dateOfBirth}}</p> -->
+                <p>{{appointment.bookingDate | date:'dd/MM/yyyy'}}</p>
+            </td>
+            <td style="text-align: left; width: 9%;">
+                <!-- <p>{{agent.dateOfBirth}}</p> -->
+                <p>{{appointment.appointmentDate | date:'dd/MM/yyyy'}}</p>
+            </td>
+
+            <td style="text-align: left; width: 26%;">
+                <p>{{appointment.disease}}</p>
+            </td>
+            <!-- <td><a (click)=changeStatus(agent.id) class="btn btn-danger" >Change Status</a></td> -->
+            <td>
+                <P *ngIf="appointment.status===0">Pending</P>
+                <P *ngIf="appointment.status===1">Approved</P>
+                <P *ngIf="appointment.status===2">Rejected</P>
+
+                <p *ngIf="isDoctor() || isAdmin()"> <a (click)=approve(appointment.id) class="btn btn-success"
+                        *ngIf="appointment.status===0">Approve</a></p>
+                <p *ngIf="isDoctor() || isAdmin()"> <a (click)=reject(appointment.id) class="btn btn-danger"
+                        *ngIf="appointment.status!==2">Reject</a></p>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+import { Component, OnInit } from '@angular/core';
+import { AppointmentService } from '../appointment.service';
+import { Appointment } from 'src/app/model/appointment.model';
+import { AuthService } from 'src/app/services/auth.service';
+
+@Component({
+  selector: 'app-appoinment-history',
+  templateUrl: './appoinment-history.component.html',
+  styleUrls: ['./appoinment-history.component.css']
+})
+export class AppoinmentHistoryComponent implements OnInit {
+  appointments: Appointment[];
+  username: string;
+  constructor(private appointmentService: AppointmentService, private authService: AuthService) { }
+
+  ngOnInit() {
+    this.username = this.authService.loggedUser;
+    console.log(this.username)
+    this.appointmentService.getAllBookings(this.username).subscribe((data: Appointment[]) => {
+      this.appointments = [...data];
+      console.log(this.appointments);
+    })
+  }
+  approve(id: number) {
+    this.appointmentService.appointmentStatus(id, 1).subscribe((data) => {
+      this.ngOnInit();
+    })
+  }
+
+  reject(id: number) {
+    this.appointmentService.appointmentStatus(id, 2).subscribe((data) => {
+      this.ngOnInit();
+    })
+  }
+  isAdmin() {
+    return this.authService.role === "ROLE_ADMIN"
+  }
+  isAgent() {
+    return this.authService.role === "ROLE_AGENT"
+  }
+  isPatient() {
+    return this.authService.role === "ROLE_PATIENT"
+  }
+  isDoctor() {
+    return this.authService.role === "ROLE_DOCTOR"
+  }
+}
+...........................................................
+
+
+
+
+<div class="row justify-content-center mt-5">
+    <div class="col col-md-8 col-lg-8 col-sm-12">
+        <div class="card">
+            <div class="card-header">Appointment Booking</div>
+            <div class="card-body">
+
+                <div class="alert alert-success" *ngIf="submitStatus">Booking Request Successfull !!</div>
+                <div *ngIf="submitStatus"><a routerLink="/appointmenthistory">Check Booking History</a></div>
+                <form [formGroup]="appointmentBookingForm" (submit)="onSignAppointmentBookingSubmit()" *ngIf="!submitStatus">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="firstname">First Name</label>
+                                <input type="text" name="firstname" formControlName="firstname" class="form-control">
+                                <span class="validation-error"
+                                    *ngIf="firstname.touched && firstname.hasError('required')">First name cannot be
+                                    empty</span>
+                                <span class="validation-error" *ngIf="firstname.hasError('maxlength')">Firstname cannot
+                                    exceed 50 characters.</span>
+                                <span class="validation-error" *ngIf="firstname.hasError('pattern')">Special Characters
+                                    are not allowed</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" name="firstname" formControlName="lastname" class="form-control">
+                                <span class="validation-error"
+                                    *ngIf="lastname.touched && lastname.hasError('required')">Last name cannot be
+                                    empty</span>
+                                <span class="validation-error" *ngIf="lastname.hasError('maxlength')">Lastname cannot
+                                    exceed 50 characters.</span>
+                                <span class="validation-error" *ngIf="lastname.hasError('pattern')">Special Characters
+                                    are not allowed</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="appointmentDate">Date Of Appointment</label>
+                                <input type="date" name="appointmentDate" id="appointmentDate" class="form-control"
+                                    formControlName="appointmentDate">
+                                <span class="validation-error"
+                                    *ngIf="appointmentDate.touched && appointmentDate.hasError('required')">Date Of
+                                    Appointment cannot
+                                    be
+                                    empty</span>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label for="disease">Disease</label>
+                                <input type="text" name="disease" formControlName="disease" class="form-control">
+                                <span class="validation-error"
+                                    *ngIf="disease.touched && disease.hasError('required')">Last name cannot be
+                                    empty</span>
+                                <span class="validation-error" *ngIf="disease.hasError('maxlength')">Lastname cannot
+                                    exceed 50 characters.</span>
+                                <span class="validation-error" *ngIf="disease.hasError('pattern')">Special Characters
+                                    are not allowed</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+
+                                <label for="doctorId">Select Doctor</label>
+                                <select name="doctorId" formControlName="doctorId" class="form-control">
+                                    <option *ngFor="let doctor of doctors" [value]="doctor.id">
+                                        {{doctor.firstName}} {{doctor.lastName}} ( Doctor Id: {{doctor.id}} )
+                                    </option>
+                                </select>
+
+                                <span class="validation-error"
+                                    *ngIf="doctorId.touched && doctorId.hasError('required')">Doctor must be selected
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <input type="submit" class="btn btn-danger" value="Book Appointment"
+                            [disabled]="!appointmentBookingForm.valid">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DoctorService } from 'src/app/doctor/doctor.service';
+import { Doctor } from 'src/app/model/doctor.model';
+import { Appointment } from 'src/app/model/appointment.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/model/user.model';
+import { AppointmentService } from '../appointment.service';
+
+@Component({
+  selector: 'app-appoinment-booking',
+  templateUrl: './appoinment-booking.component.html',
+  styleUrls: ['./appoinment-booking.component.css']
+})
+export class AppoinmentBookingComponent implements OnInit {
+
+  constructor(private doctorService: DoctorService, private authService: AuthService, private appointmentService:AppointmentService) { }
+  appointmentBookingForm: FormGroup;
+  doctors: Doctor[];
+  appointment: Appointment;
+  loggedUser: User;
+  userName: string;
+  bookedDoctor: Doctor;
+  submitStatus:boolean;
+  bookDate:Date;
+  ngOnInit() {
+    this.appointmentBookingForm = new FormGroup({
+      'firstname': new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
+      'lastname': new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
+      'appointmentDate': new FormControl(null, [Validators.required]),
+      'disease': new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$'), Validators.maxLength(50)]),
+      'doctorId': new FormControl(null, [Validators.required, Validators.maxLength(20)]),
+    })
+
+    this.doctorService.getDoctors().subscribe((data: Doctor[]) => {
+      this.doctors = [...data]
+      console.log(this.doctors);
+
+    })
+    this.userName = this.authService.loggedUser;
+    this.authService.getUser(this.userName).subscribe((data) => {
+      this.loggedUser = data;
+      console.log("user")
+      console.log(this.loggedUser)
+    })
+
+    this.bookDate=new Date();
+    //this.bookDate.setDate()
+
+    //  let today = new Date()
+    //let tomorrow = new Date(today)
+    //tomorrow.setDate(tomorrow.getDate() + 1)
+    //console.log(tomorrow.getMonth()+1+"-"+tomorrow.getDate()+"-"+tomorrow.getFullYear())
+  }
+
+  get firstname() {
+    return this.appointmentBookingForm.get('firstname');
+  }
+  get lastname() {
+    return this.appointmentBookingForm.get('lastname');
+  }
+  get appointmentDate() {
+    return this.appointmentBookingForm.get('appointmentDate');
+  }
+  get disease() {
+    return this.appointmentBookingForm.get('disease');
+  }
+  get doctorId() {
+    return this.appointmentBookingForm.get('doctorId');
+  }
+
+  onSignAppointmentBookingSubmit() {
+
+    // this.userName = this.authService.loggedUser;
+    // this.authService.getUser(this.userName).subscribe((data) => {
+    //   this.loggedUser = data;
+    //   console.log("user")
+    //   console.log(this.loggedUser)
+    // })
+
+   // let id = this.appointmentBookingForm.get('doctorId').value;
+    // console.log("id" + id)
+    // this.doctorService.getDoctor(id).subscribe((data) => {
+    //   this.bookedDoctor = data
+    //   console.log("doctor")
+    //   console.log(this.bookedDoctor)
+    // })
+    let id = this.appointmentBookingForm.get('doctorId').value;
+    this.bookedDoctor = this.doctors.find(doctor => doctor.id== id);
+
+    console.log(this.appointmentBookingForm.value)
+    this.appointment = {
+      patientFirstName: this.appointmentBookingForm.get('firstname').value,
+      patientLastName: this.appointmentBookingForm.get('lastname').value,
+      appointmentDate: this.appointmentBookingForm.get('appointmentDate').value,
+      bookingDate:this.bookDate,
+      status: 0,
+      disease: this.appointmentBookingForm.get('disease').value,
+      doctor: this.bookedDoctor,
+      user: this.loggedUser,
+     // doctor:this.getDoctor(id),
+     // user: this.getUser()
+    }
+    console.log("app")
+    console.log(this.appointment)
+
+    this.appointmentService.bookAppointment(this.appointment).subscribe((data)=>{
+      this.submitStatus=true;
+    })
+
+  }
+}

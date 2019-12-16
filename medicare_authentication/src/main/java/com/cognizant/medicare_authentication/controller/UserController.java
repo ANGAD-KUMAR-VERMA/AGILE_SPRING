@@ -92,6 +92,12 @@ public class UserController {
 		return doctorService.getDoctor(id);
 	}
 	
+	@GetMapping("/get/doctors/{username}")
+	public Doctor getDoctorUsername(@PathVariable String username) {
+		return doctorService.getDoctorByUsername(username);
+	}
+	
+	
 	@PutMapping("/doctors")
 	public void modifyDoctor(@RequestBody Doctor doctor){
 		doctorService.modifyDoctor(doctor);
@@ -118,6 +124,11 @@ public class UserController {
 		agentService.deleteAgent(agent);
 	}
 	
+	@GetMapping("/get/agents/{username}")
+	public Agent getAgentUsername(@PathVariable String username) {
+		return agentService.getAgentByUsername(username);
+	}
+	
 	@GetMapping("/patients")
 	public List<Patient> patients() {
 		return (patientService.getAllPatients());
@@ -128,10 +139,16 @@ public class UserController {
 		return patientService.getPatient(id);
 	}
 	
+	@GetMapping("/get/patients/{username}")
+	public Patient getPatientUsername(@PathVariable String username) {
+		return patientService.getPatientByUsername(username);
+	}
+	
 	@PutMapping("/patients")
 	public void modifyPatient(@RequestBody Patient patient){
 		patientService.modifyPatient(patient);
 	}
+	
 	
 	@PutMapping("/appointment/{agentId}/{doctorId}/{patientId}/{appointmentDate}")
 	public boolean appointment(@PathVariable long agentId, @PathVariable long doctorId,@PathVariable long patientId,@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate appointmentDate) {
@@ -142,6 +159,13 @@ public class UserController {
 	public List<Appointment> getAppointments(@PathVariable long patientId){
 		return patientService.getAppointments(patientId);
 	}
+	
+	@GetMapping("/doctors/appointments/{doctorId}")
+	public List<Appointment> getAppointmentsForDoctor(@PathVariable long doctorId){
+		return doctorService.getAppointments(doctorId);
+	}
+	
+	
 	
 	@GetMapping("/medicareServices")
 	public List<MedicareServices> getAllServices(){

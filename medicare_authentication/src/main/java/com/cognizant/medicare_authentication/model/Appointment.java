@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="appointment")
 public class Appointment {
@@ -29,15 +31,17 @@ public class Appointment {
 	@Column(name="ap_status")
 	private String status;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ap_dr_id")
 	private Doctor doctor;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ap_pt_id")
 	private Patient patient;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ap_ag_id")
 	private Agent agent;
