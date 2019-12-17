@@ -31,17 +31,15 @@ public class Appointment {
 	@Column(name="ap_status")
 	private String status;
 	
-	@JsonIgnore
+   
 	@ManyToOne
 	@JoinColumn(name="ap_dr_id")
 	private Doctor doctor;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ap_pt_id")
 	private Patient patient;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ap_ag_id")
 	private Agent agent;

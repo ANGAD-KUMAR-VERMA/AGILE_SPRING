@@ -58,10 +58,8 @@ public class Agent {
 	private boolean status;
 	
 	
-	@JsonIgnore
-	@ManyToMany(mappedBy="agentList",fetch=FetchType.EAGER)
-	private Set<Patient> patientList;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "agent")
 	private Set<Appointment> appointment;
 	
@@ -209,14 +207,6 @@ public class Agent {
 		this.status = status;
 	}
 
-	public Set<Patient> getPatientList() {
-		return patientList;
-	}
-
-	public void setPatientList(Set<Patient> patientList) {
-		this.patientList = patientList;
-	}
-
 	public Set<Appointment> getAppointment() {
 		return appointment;
 	}
@@ -233,20 +223,10 @@ public class Agent {
 		this.user = user;
 	}
 
-	@Override
-	public String toString() {
-		return "Agent [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
-				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
-				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
-				+ ", status=" + status + ", patientList=" + patientList + ", appointment=" + appointment + ", user="
-				+ user + "]";
-	}
-
 	public Agent(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
-			String address2, String city, String state, String zipcode, boolean status, Set<Patient> patientList,
-			Set<Appointment> appointment, User user) {
+			String address2, String city, String state, String zipcode, boolean status, Set<Appointment> appointment,
+			User user) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -265,10 +245,19 @@ public class Agent {
 		this.state = state;
 		this.zipcode = zipcode;
 		this.status = status;
-		this.patientList = patientList;
 		this.appointment = appointment;
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Agent [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
+				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
+				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
+				+ ", status=" + status + ", appointment=" + appointment + ", user=" + user + "]";
+	}
+
 	
+    
 }

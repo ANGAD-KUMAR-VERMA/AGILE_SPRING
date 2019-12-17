@@ -7,13 +7,19 @@ import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.medicare_authentication.model.Agent;
+import com.cognizant.medicare_authentication.model.Appointment;
+import com.cognizant.medicare_authentication.model.Patient;
 import com.cognizant.medicare_authentication.repository.AgentRepository;
+import com.cognizant.medicare_authentication.repository.AppointmentRespository;
 
 @Service
 public class AgentService {
 	
 	@Autowired
 	private AgentRepository agentRepository;
+	
+	@Autowired
+	private AppointmentRespository appointmentRespository;
 
 	public List<Agent> getAllAgents(){
 		return agentRepository.findAll();
@@ -55,5 +61,10 @@ public Agent getAgentByUsername(String username) {
 	public void deleteAgent(Agent agent)
 	{
 		agentRepository.delete(agent);
+	}
+	
+	public List<Appointment> getAppointments(long agentId){
+		Agent agent = agentRepository.findById(agentId).get();
+		return appointmentRespository.findByAgent(agent);
 	}
 }

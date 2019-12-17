@@ -59,20 +59,11 @@ public class Patient {
 	private boolean status;
 	
 	
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="patient_doctor")
-	private Set<Doctor> doctorList;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="patient_agent")
-	private Set<Agent> agentList;
-	
 	@JsonIgnore
 	@OneToOne(mappedBy = "patient")
 	private User user;
 	
-@JsonIgnore
+      @JsonIgnore
 	@OneToMany(mappedBy = "patient")
 	private Set<Appointment> appointment;
 	
@@ -291,30 +282,6 @@ public class Patient {
 
 
 
-	public Set<Doctor> getDoctorList() {
-		return doctorList;
-	}
-
-
-
-	public void setDoctorList(Set<Doctor> doctorList) {
-		this.doctorList = doctorList;
-	}
-
-
-
-	public Set<Agent> getAgentList() {
-		return agentList;
-	}
-
-
-
-	public void setAgentList(Set<Agent> agentList) {
-		this.agentList = agentList;
-	}
-
-
-
 	public User getUser() {
 		return user;
 	}
@@ -353,9 +320,8 @@ public class Patient {
 
 	public Patient(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
-			String address2, String city, String state, String zipcode, boolean status, Set<Doctor> doctorList,
-			Set<Agent> agentList, User user, Set<Appointment> appointment,
-			Set<MedicalTestHistory> medicalTestHistoryList) {
+			String address2, String city, String state, String zipcode, boolean status, User user,
+			Set<Appointment> appointment, Set<MedicalTestHistory> medicalTestHistoryList) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -374,8 +340,6 @@ public class Patient {
 		this.state = state;
 		this.zipcode = zipcode;
 		this.status = status;
-		this.doctorList = doctorList;
-		this.agentList = agentList;
 		this.user = user;
 		this.appointment = appointment;
 		this.medicalTestHistoryList = medicalTestHistoryList;
@@ -389,10 +353,9 @@ public class Patient {
 				+ ", password=" + password + ", age=" + age + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth
 				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
 				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
-				+ ", status=" + status + ", doctorList=" + doctorList + ", agentList=" + agentList + ", user=" + user
-				+ ", appointment=" + appointment + ", medicalTestHistoryList=" + medicalTestHistoryList + "]";
+				+ ", status=" + status + ", user=" + user + ", appointment=" + appointment + ", medicalTestHistoryList="
+				+ medicalTestHistoryList + "]";
 	}
 
-	
-	
+
 }

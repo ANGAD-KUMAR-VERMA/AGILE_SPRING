@@ -71,10 +71,6 @@ public class Doctor {
 	
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy="doctorList",fetch=FetchType.EAGER)
-	private Set<Patient> patientList;
-	
-	@JsonIgnore
 	@OneToOne(mappedBy="doctor")
 	private User user;
 	
@@ -266,14 +262,6 @@ public class Doctor {
 		this.status = status;
 	}
 
-	public Set<Patient> getPatientList() {
-		return patientList;
-	}
-
-	public void setPatientList(Set<Patient> patientList) {
-		this.patientList = patientList;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -301,8 +289,8 @@ public class Doctor {
 	public Doctor(long id, String username, String firstname, String lastname, String password, String age,
 			String gender, Date dateOfBirth, String contactNo, String altContactNo, String email, String address1,
 			String address2, String city, String state, String zipcode, String degree, String speciality,
-			String workhours, String hospitalname, long medicareServiceId, boolean status, Set<Patient> patientList,
-			User user, Set<Appointment> appointmentList, Set<MedicareServices> medicareServicesList) {
+			String workhours, String hospitalname, long medicareServiceId, boolean status, User user,
+			Set<Appointment> appointmentList, Set<MedicareServices> medicareServicesList) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -326,7 +314,6 @@ public class Doctor {
 		this.hospitalname = hospitalname;
 		this.medicareServiceId = medicareServiceId;
 		this.status = status;
-		this.patientList = patientList;
 		this.user = user;
 		this.appointmentList = appointmentList;
 		this.medicareServicesList = medicareServicesList;
@@ -339,9 +326,8 @@ public class Doctor {
 				+ ", contactNo=" + contactNo + ", altContactNo=" + altContactNo + ", email=" + email + ", address1="
 				+ address1 + ", address2=" + address2 + ", city=" + city + ", state=" + state + ", zipcode=" + zipcode
 				+ ", degree=" + degree + ", speciality=" + speciality + ", workhours=" + workhours + ", hospitalname="
-				+ hospitalname + ", medicareServiceId=" + medicareServiceId + ", status=" + status + ", patientList="
-				+ patientList + ", user=" + user + ", appointmentList=" + appointmentList + ", medicareServicesList="
-				+ medicareServicesList + "]";
+				+ hospitalname + ", medicareServiceId=" + medicareServiceId + ", status=" + status + ", user=" + user
+				+ ", appointmentList=" + appointmentList + ", medicareServicesList=" + medicareServicesList + "]";
 	}
 
 	

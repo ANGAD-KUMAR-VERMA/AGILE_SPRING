@@ -28,6 +28,7 @@ import com.cognizant.medicare_authentication.model.Patient;
 import com.cognizant.medicare_authentication.model.User;
 import com.cognizant.medicare_authentication.service.AgentService;
 import com.cognizant.medicare_authentication.service.AppUserDetailsService;
+import com.cognizant.medicare_authentication.service.AppointmentService;
 import com.cognizant.medicare_authentication.service.DoctorService;
 import com.cognizant.medicare_authentication.service.MedicareServicesService;
 import com.cognizant.medicare_authentication.service.PatientService;
@@ -58,6 +59,9 @@ public class UserController {
 	
 	@Autowired
 	private MedicareServicesService medicareServicesService; 
+	
+	@Autowired
+	private AppointmentService appointmentService;
 
 	@PostMapping
 	public User signUp(@RequestBody @Valid User user) throws UserAlreadyExistsException {
@@ -155,14 +159,34 @@ public class UserController {
 		return patientService.appointment(appointmentDate, doctorId, patientId, agentId);
 	}
 	
+	@PutMapping("/appointments")
+	public void appointment(@RequestBody Appointment appointment) {
+		 appointmentService.modifyAppointment(appointment);
+	}
+	
 	@GetMapping("/get/appointments/{patientId}")
 	public List<Appointment> getAppointments(@PathVariable long patientId){
 		return patientService.getAppointments(patientId);
 	}
 	
+	@GetMapping("/get/appointment/{appointmentId}")
+	public Appointment getAppointment(@PathVariable long appointmentId){
+		return appointmentService.getAppointment(appointmentId);
+	}
+	
+	@GetMapping("/admin/appointments")
+	public List<Appointment> getAppointmentsForAdmin(){
+		return appointmentService.getAppointments();
+	}
+	
+	@GetMapping("/agents/appointments/{agentId}")
+	public List<Appointment> getAppointmentsByAgents(@PathVariable long agentId){
+		return agentService.getAppointments(agentId);
+	}
+	
 	@GetMapping("/doctors/appointments/{doctorId}")
 	public List<Appointment> getAppointmentsForDoctor(@PathVariable long doctorId){
-		return doctorService.getAppointments(doctorId);
+		return doctorService.getAllAppointmentsForDoctor(doctorId);
 	}
 	
 	

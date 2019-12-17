@@ -63,4 +63,8 @@ public List<Appointment> getAppointments(long doctorId) {
 	
 	return appointmentRespository.findByDoctorId(doctorId);
 }
+
+public List<Appointment> getAllAppointmentsForDoctor(long doctorId){
+	return appointmentRespository.getAllAppointmentsForDoctor(doctorId);
+}
 }
