@@ -25,6 +25,7 @@ import com.cognizant.medicare_authentication.model.Appointment;
 import com.cognizant.medicare_authentication.model.Doctor;
 import com.cognizant.medicare_authentication.model.MedicareServices;
 import com.cognizant.medicare_authentication.model.Patient;
+import com.cognizant.medicare_authentication.model.SecurityQue;
 import com.cognizant.medicare_authentication.model.User;
 import com.cognizant.medicare_authentication.service.AgentService;
 import com.cognizant.medicare_authentication.service.AppUserDetailsService;
@@ -32,6 +33,7 @@ import com.cognizant.medicare_authentication.service.AppointmentService;
 import com.cognizant.medicare_authentication.service.DoctorService;
 import com.cognizant.medicare_authentication.service.MedicareServicesService;
 import com.cognizant.medicare_authentication.service.PatientService;
+import com.cognizant.medicare_authentication.service.SecurityQueService;
 import com.cognizant.medicare_authentication.service.UserService;
 import com.cognizant.medicare_authentication.util.UserAlreadyExistsException;
 
@@ -42,6 +44,8 @@ import ch.qos.logback.core.db.dialect.MsSQLDialect;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+	
+	
 	@Autowired
 	private AppUserDetailsService userService;
 	
@@ -69,6 +73,8 @@ public class UserController {
 		return userService.signUp(user);
 	}
 
+	
+	
 	@GetMapping("/{username}")
 	public boolean usernameAvailable(@PathVariable String username) {
 		System.out.println(username);
@@ -79,6 +85,11 @@ public class UserController {
 	public User getUser(@PathVariable String username) {
 		return (userServiceUserAvailability.getUser(username));
 	}
+	@GetMapping("/getById/{id}")
+	public User getUser(@PathVariable long id) {
+		return (userServiceUserAvailability.getUserById(id));
+	}
+	
 	
 	@PutMapping("/{username}")
 	public void modifyUser(@RequestBody User user, @PathVariable String username) {System.out.println(username);

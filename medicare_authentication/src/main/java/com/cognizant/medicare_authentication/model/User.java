@@ -38,6 +38,12 @@ public class User {
 	@Column(name ="us_status")
 	private Boolean status;
 	
+	@Column(name="us_security_que")
+	private String securityQue;
+	
+	@Column(name = "us_security_answer")
+	private String securityAnswer;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role",joinColumns = @JoinColumn(name="ur_us_id"),inverseJoinColumns = @JoinColumn(name="ur_ro_id"))
 	private Set<Role> roleList;
@@ -98,6 +104,22 @@ public class User {
 		this.status = status;
 	}
 
+	public String getSecurityQue() {
+		return securityQue;
+	}
+
+	public void setSecurityQue(String securityQue) {
+		this.securityQue = securityQue;
+	}
+
+	public String getSecurityAnswer() {
+		return securityAnswer;
+	}
+
+	public void setSecurityAnswer(String securityAnswer) {
+		this.securityAnswer = securityAnswer;
+	}
+
 	public Set<Role> getRoleList() {
 		return roleList;
 	}
@@ -138,13 +160,15 @@ public class User {
 		this.agent = agent;
 	}
 
-	public User(int userId, String username, String password, Boolean status, Set<Role> roleList, Admin admin,
-			Doctor doctor, Patient patient, Agent agent) {
+	public User(int userId, String username, String password, Boolean status, String securityQue, String securityAnswer,
+			Set<Role> roleList, Admin admin, Doctor doctor, Patient patient, Agent agent) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.status = status;
+		this.securityQue = securityQue;
+		this.securityAnswer = securityAnswer;
 		this.roleList = roleList;
 		this.admin = admin;
 		this.doctor = doctor;
@@ -155,10 +179,9 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", status=" + status
-				+ ", roleList=" + roleList + ", admin=" + admin + ", doctor=" + doctor + ", patient=" + patient
-				+ ", agent=" + agent + "]";
+				+ ", securityQue=" + securityQue + ", securityAnswer=" + securityAnswer + ", roleList=" + roleList
+				+ ", admin=" + admin + ", doctor=" + doctor + ", patient=" + patient + ", agent=" + agent + "]";
 	}
 
-	
-	
+
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.medicare_authentication.model.Admin;
@@ -55,13 +56,19 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 
+	public User getUserById(long id) {
+		return userRepository.findById((int)id).get();
+	}
 	public void modifyUser(User user,String username) {
 		System.out.println(user);
 		User newUser = userRepository.findByUsername(username);
 		newUser.setUsername(user.getUsername());
-		newUser.setPassword(user.getPassword());
+		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+		newUser.setPassword(encoder.encode(user.getPassword()));
 		newUser.setRoleList(user.getRoleList());
 		newUser.setStatus(user.getStatus());
+		newUser.setSecurityQue(user.getSecurityQue());
+		newUser.setSecurityAnswer(user.getSecurityAnswer());
 		Set<Role> roleList = user.getRoleList();
 		int roleId = 0;
 		for (Role role : roleList) {
