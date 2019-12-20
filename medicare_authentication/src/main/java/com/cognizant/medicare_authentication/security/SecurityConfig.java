@@ -56,6 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.permitAll()
 		.antMatchers("/medicareServices/**")
 		.permitAll()
+		.antMatchers("/feedback")
+		.permitAll()
 		.antMatchers(HttpMethod.GET,"/menu-items")
 		.permitAll()
 //		.antMatchers("/carts/**")
