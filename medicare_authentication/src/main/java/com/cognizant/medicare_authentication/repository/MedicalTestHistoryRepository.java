@@ -11,6 +11,7 @@ import com.cognizant.medicare_authentication.model.MedicalTestHistory;
 public interface MedicalTestHistoryRepository extends JpaRepository<MedicalTestHistory, Long> {
 	
 	public List<MedicalTestHistory> findByCustomerId(long id);
+	public List<MedicalTestHistory> findByDoctorId(long id);
 
 	 
 	

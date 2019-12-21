@@ -3,6 +3,7 @@ package com.cognizant.medicare_authentication.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -67,7 +68,8 @@ public class Patient {
 	@OneToMany(mappedBy = "patient")
 	private Set<Appointment> appointment;
 	
-	@OneToMany(mappedBy = "patient")
+   
+	@OneToMany(mappedBy = "patient",cascade=CascadeType.ALL)
 	private Set<MedicalTestHistory> medicalTestHistoryList;
 	
 	

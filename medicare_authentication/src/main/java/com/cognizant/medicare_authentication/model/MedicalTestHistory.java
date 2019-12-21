@@ -2,6 +2,7 @@ package com.cognizant.medicare_authentication.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="medical_test_history")
@@ -58,7 +61,8 @@ public class MedicalTestHistory {
 	@Column(name="mt_other_info")
 	private String otherInfo;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "mt_pt_id")
 	private Patient patient;
 	
