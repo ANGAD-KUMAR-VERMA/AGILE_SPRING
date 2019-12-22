@@ -29,6 +29,11 @@ public class MedicalTestHistoryController {
 		medicalTestHistoryService.signUp(id,medicalTestHistory);
 	}
 	
+	@PutMapping("put")
+	public void update( @RequestBody MedicalTestHistory medicalTestHistory) {
+		medicalTestHistoryService.update( medicalTestHistory);
+	}
+	
 	@GetMapping
 	public List<MedicalTestHistory> getAllTestHistoryResults(){
 		return medicalTestHistoryService.getAllMedicalTestResults();
@@ -39,8 +44,18 @@ public class MedicalTestHistoryController {
 		return medicalTestHistoryService.getTestHistoryByPatientId(id);
 	}
 	
+	@GetMapping("/agent/{id}")
+	public List<MedicalTestHistory> getAgentTestHistory(@PathVariable long id) {
+		return medicalTestHistoryService.getTestHistoryByAgentId(id);
+	}
+	
 	@GetMapping("{id}")
 	public List<MedicalTestHistory> getDoctorTestHistory(@PathVariable long id) {
 		return medicalTestHistoryService.getTestHistoryByDoctorId(id);
+	}
+	
+	@GetMapping("/get/{id}")
+	public MedicalTestHistory getById(@PathVariable long id) {
+		return medicalTestHistoryService.getTestHistoryById(id);
 	}
 }

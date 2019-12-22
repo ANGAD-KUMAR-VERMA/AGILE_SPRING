@@ -1,0 +1,103 @@
+1. How often did doctors communicate well with patients?
+2. How often did nurses communicate well with patients?
+3) How often did patients receive help quickly from hospital staff?
+4) How often did staff explain about medicines before giving them to patients
+5) How often were the patients' rooms and bathrooms kept clean?
+6) How often was the area around patients' rooms kept quiet at night?	
+7) Were patients given information about what to do during their recovery at home?	
+8) How well did patients understand the type of care they would need after leaving the hospital?
+9) How do patients rate the hospital?
+10) Would patients recommend the hospital to friends and family?
+11.Based on your complete experience with our medical care facility, how likely are you to recommend us to a friend or colleague?
+12.Did you have any issues arranging an appointment?
+13.How would you rate the professionalism of our staff?
+14.Are you currently covered under a health insurance plan?
+15.How would you rate the investigative diagnosis process that you underwent?
+16.How often did you receive conflicting information from different medical care professionals at this hospital?
+17.What is the difference in care provided by the hospitals available in your area?
+18.Was your copayments and coinsurances split correctly between Medicare and Medicaid by the hospital?
+19.Is your primary health care physician able to conduct a swift diagnosis and prescribe medication?
+20.Did the pharmacy staff bill your health provider and collect the right deductible from you for your medicines?
+21.Were the ambulatory staff quick to respond to your medical care request?
+
+{
+   "que_1":"How often did doctors communicate well with patients?",
+   "que_2":"How often did patients receive help quickly from hospital staff?",
+   "que_3":"How often did staff explain about medicines before giving them to patients",
+   "que_4":" How often were the patients' rooms and bathrooms kept clean?",
+   "que_5":"How often was the area around patients' rooms kept quiet at night?",
+   "que_6":"Did you have any issues arranging an appointment?",
+   "que_7":"Were patients given information about what to do during their recovery at home?",
+   "que_8":"Are you currently covered under a health insurance plan?",
+   "que_9":"How do patients rate the hospital?",
+   "que_10":"Would patients recommend the hospital to friends and family?"
+    
+}
+
+[
+    {
+        "id": 1,
+        "que": "In what city were you born?"
+    },
+    {
+        "id": 2,
+        "que": "What is the name of your first school?"
+    },
+    {
+        "id": 3,
+        "que": "What is your favorite movie?"
+    },
+    {
+        "id": 4,
+        "que": "What is your mother's maiden name?"
+    },
+    {
+        "id": 5,
+        "que": "What was the make of your first car?"
+    },
+    {
+        "id": 6,
+        "que": "What is your favorite color?"
+    },
+    {
+        "id": 7,
+        "que": "What is your father's middle name?"
+    },
+    {
+        "id": 8,
+        "que": "what is your favorite social media website"
+    },
+    {
+        "id": 9,
+        "que": "What was your favorite place to visit as a child?"
+    },
+    {
+        "id": 11,
+        "que": "What is the name of your first grade teacher?"
+    }
+]
+
+
+[
+    {
+        "id": 1,
+        "medicareService": "root canalll",
+        "serviceDescription": "tooth cavity Treatment",
+        "amount": 4000.0
+    },
+    {
+        "id": 2,
+        "medicareService": "fever",
+        "serviceDescription": "Viral Fever",
+        "amount": 1000.0
+    },
+    {
+        "id": 3,
+        "medicareService": "X-ray",
+        "serviceDescription": "X-ray",
+        "amount": 2000.0
+    }
+
+
+
+]

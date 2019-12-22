@@ -12,6 +12,9 @@ public interface MedicalTestHistoryRepository extends JpaRepository<MedicalTestH
 	
 	public List<MedicalTestHistory> findByCustomerId(long id);
 	public List<MedicalTestHistory> findByDoctorId(long id);
+	public List<MedicalTestHistory> findByAgentId(long id);
+	public MedicalTestHistory findByReportId(long id);
+	public MedicalTestHistory findByDoctorComments(String doctorComments);
 
 	 
 	

@@ -34,4 +34,6 @@ public class FeedbackController {
 	 public List<Feedback> getFeedback() {
 		 return feedbackService.getAllFeedback();
 	 }
+	 
+	 
 }

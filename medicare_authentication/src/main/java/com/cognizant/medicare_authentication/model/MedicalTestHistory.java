@@ -61,8 +61,8 @@ public class MedicalTestHistory {
 	@Column(name="mt_other_info")
 	private String otherInfo;
 	
-	@JsonIgnore
-	@ManyToOne(cascade=CascadeType.ALL)
+	
+	@ManyToOne
 	@JoinColumn(name = "mt_pt_id")
 	private Patient patient;
 	

@@ -36,7 +36,7 @@ public Agent getAgentByUsername(String username) {
 	}
 
 	public void modifyAgent(Agent agent) {
-		
+		System.out.println(agent);
 		Agent newAgent = agentRepository.findByUsername(agent.getUsername());
 		newAgent.setUsername(agent.getUsername());
 		newAgent.setFirstname(agent.getFirstname());

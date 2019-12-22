@@ -68,8 +68,8 @@ public class Patient {
 	@OneToMany(mappedBy = "patient")
 	private Set<Appointment> appointment;
 	
-   
-	@OneToMany(mappedBy = "patient",cascade=CascadeType.ALL)
+     @JsonIgnore
+	@OneToMany(mappedBy = "patient")
 	private Set<MedicalTestHistory> medicalTestHistoryList;
 	
 	

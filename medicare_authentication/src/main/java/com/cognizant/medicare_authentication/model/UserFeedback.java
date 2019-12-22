@@ -23,8 +23,12 @@ public class UserFeedback {
 	private long userId;
 	@Column(name="uf_ass_id")
 	private long assessmentId;
+	@Column(name = "uf_doctor_name")
+	private String doctorName;
 	@Column(name = "uf_doc_id")
 	private long doctorId;
+	@Column(name = "uf_patient_name")
+	private String patientName;
 	@Column(name = "uf_pat_id")
 	private long patientId;
 	@Column(name = "uf_app_id")
@@ -77,12 +81,28 @@ public class UserFeedback {
 		this.assessmentId = assessmentId;
 	}
 
+	public String getDoctorName() {
+		return doctorName;
+	}
+
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
+
 	public long getDoctorId() {
 		return doctorId;
 	}
 
 	public void setDoctorId(long doctorId) {
 		this.doctorId = doctorId;
+	}
+
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
 	}
 
 	public long getPatientId() {
@@ -197,14 +217,16 @@ public class UserFeedback {
 		this.feedback = feedback;
 	}
 
-	public UserFeedback(long userId, long assessmentId, long doctorId, long patientId, long appointmentId,
-			String ratingQue_1, String ratingQue_2, String ratingQue_3, String ratingQue_4, String ratingQue_5,
-			String ratingQue_6, String ratingQue_7, String ratingQue_8, String ratingQue_9, String ratingQue_10,
-			Date assessmentDate, Feedback feedback) {
+	public UserFeedback(long userId, long assessmentId, String doctorName, long doctorId, String patientName,
+			long patientId, long appointmentId, String ratingQue_1, String ratingQue_2, String ratingQue_3,
+			String ratingQue_4, String ratingQue_5, String ratingQue_6, String ratingQue_7, String ratingQue_8,
+			String ratingQue_9, String ratingQue_10, Date assessmentDate, Feedback feedback) {
 		super();
 		this.userId = userId;
 		this.assessmentId = assessmentId;
+		this.doctorName = doctorName;
 		this.doctorId = doctorId;
+		this.patientName = patientName;
 		this.patientId = patientId;
 		this.appointmentId = appointmentId;
 		this.ratingQue_1 = ratingQue_1;
@@ -223,12 +245,14 @@ public class UserFeedback {
 
 	@Override
 	public String toString() {
-		return "UserFeedback [userId=" + userId + ", assessmentId=" + assessmentId + ", doctorId=" + doctorId
-				+ ", patientId=" + patientId + ", appointmentId=" + appointmentId + ", ratingQue_1=" + ratingQue_1
-				+ ", ratingQue_2=" + ratingQue_2 + ", ratingQue_3=" + ratingQue_3 + ", ratingQue_4=" + ratingQue_4
-				+ ", ratingQue_5=" + ratingQue_5 + ", ratingQue_6=" + ratingQue_6 + ", ratingQue_7=" + ratingQue_7
-				+ ", ratingQue_8=" + ratingQue_8 + ", ratingQue_9=" + ratingQue_9 + ", ratingQue_10=" + ratingQue_10
-				+ ", assessmentDate=" + assessmentDate + ", feedback=" + feedback + "]";
+		return "UserFeedback [userId=" + userId + ", assessmentId=" + assessmentId + ", doctorName=" + doctorName
+				+ ", doctorId=" + doctorId + ", patientName=" + patientName + ", patientId=" + patientId
+				+ ", appointmentId=" + appointmentId + ", ratingQue_1=" + ratingQue_1 + ", ratingQue_2=" + ratingQue_2
+				+ ", ratingQue_3=" + ratingQue_3 + ", ratingQue_4=" + ratingQue_4 + ", ratingQue_5=" + ratingQue_5
+				+ ", ratingQue_6=" + ratingQue_6 + ", ratingQue_7=" + ratingQue_7 + ", ratingQue_8=" + ratingQue_8
+				+ ", ratingQue_9=" + ratingQue_9 + ", ratingQue_10=" + ratingQue_10 + ", assessmentDate="
+				+ assessmentDate + ", feedback=" + feedback + "]";
 	}
+
 	
 }
